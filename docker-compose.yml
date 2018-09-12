@@ -24,6 +24,7 @@ services:
   php:
     build: .
     volumes:
+      - ./docker-php.ini:/usr/local/etc/php/conf.d/php.ini
       - .:/var/www/html
     depends_on:
       - mysql
