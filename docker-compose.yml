@@ -14,7 +14,7 @@ services:
   mysql:
     image: mariadb
     volumes:
-      - /var/lib/mysql
+      - mysql-data:/var/lib/mysql
     environment:
       - MYSQL_ROOT_PASSWORD=root
       - MYSQL_DATABASE=wordpress
@@ -36,3 +36,6 @@ services:
       - PMA_HOST=mysql
     depends_on:
       - mysql
+
+volumes:
+  mysql-data:
