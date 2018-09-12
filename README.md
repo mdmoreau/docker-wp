@@ -15,7 +15,7 @@ Basic Docker configuration for local WordPress development
 - WP-CLI
 - phpMyAdmin
 
-## Running
+## Usage
 
 - Start: `docker compose up -d`
 - Stop: `docker compose down`
@@ -24,9 +24,8 @@ Basic Docker configuration for local WordPress development
 
 ### WP-CLI
 
-- `docker-compose run php wp --path=/var/www/html --allow-root [command]`
+- `docker-compose run php wp [command]`
 - `[command]` can be any WP-CLI command, e.g. `plugin update --all`
-- As WP-CLI is running as root, file ownership can be returned to the current host user by running `sudo chown -R $USER .`
 
 ### Fallback asset loading
 
@@ -71,8 +70,8 @@ define('WP_SITEURL', 'http://site.localhost');
 - A database can be imported after this process, though the `home` and `siteurl` values will need to be updated in the `wp_options` table to match the new `localhost` URL
 
 ```
-docker-compose run php wp --path=/var/www/html --allow-root core download
-docker-compose run php wp --path=/var/www/html --allow-root config create --dbname=wordpress --dbuser=username --dbpass=password --dbhost=mysql
-docker-compose run php wp --path=/var/www/html --allow-root core install --url=site.localhost --title=site.localhost --admin_user=admin --admin_password=admin --admin_email=admin@site.localhost --skip-email
-docker-compose run php wp --path=/var/www/html --allow-root plugin install plugin-a plugin-b plugin-c
+docker-compose run php wp core download
+docker-compose run php wp config create --dbname=wordpress --dbuser=username --dbpass=password --dbhost=mysql
+docker-compose run php wp core install --url=site.localhost --title=site.localhost --admin_user=admin --admin_password=admin --admin_email=admin@site.localhost --skip-email
+docker-compose run php wp plugin install plugin-a plugin-b plugin-c
 ```
