@@ -29,7 +29,7 @@ Basic Docker configuration for local WordPress development
 
 ### Fallback asset loading
 
-- The `docker-nginx.conf` file can be edited to automatically load any missing assets from another URL
+- The `config/docker-nginx.conf` file can be edited to automatically load any missing assets from another URL
 - `https://example.com/wp-content/uploads/` can be changed to your live uploads URL to avoid having to pull down assets for local development
 
 ### Accessing localhost
