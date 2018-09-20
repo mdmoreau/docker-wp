@@ -4,9 +4,10 @@ ARG UID=1000
 ARG GID=1000
 
 RUN apt update
-RUN apt install -y mysql-client
+RUN apt install -y mysql-client libjpeg62-turbo-dev libpng-dev
 
-RUN docker-php-ext-install mysqli
+RUN docker-php-ext-configure gd --with-jpeg-dir=/usr/include/
+RUN docker-php-ext-install mysqli gd
 
 RUN curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
 RUN chmod +x wp-cli.phar
