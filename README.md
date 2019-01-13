@@ -29,7 +29,7 @@ Basic Docker configuration for local WordPress development
 
 ### Fallback asset loading
 
-- The `config/docker-nginx.conf` file can be edited to automatically load any missing assets from another URL
+- The `docker-nginx.conf` file can be edited to automatically load any missing assets from another URL
 - `https://example.com/wp-content/uploads/` can be changed to your live uploads URL to avoid having to pull down assets for local development
 
 ### Accessing localhost
@@ -50,7 +50,7 @@ Basic Docker configuration for local WordPress development
 
 - Some services like Pantheon support a `wp-config-local.php` file for a local development configuration
 - This typically involves tracking an entire WordPress install in git while ignoring the local configuration file
-- Most databases can be imported without needing edits as the `home` and `siteurl` values from `wp-config-local.php` will take precedence over the `wp_options` values
+- Most databases can be imported without needing edits as the `WP_HOME` and `WP_SITEURL` values from `wp-config-local.php` will take precedence over the `wp_options` values
 
 ```php
 <?php
