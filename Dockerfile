@@ -12,6 +12,8 @@ RUN docker-php-ext-install mysqli gd
 RUN curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
 RUN chmod +x wp-cli.phar
 RUN mv wp-cli.phar /usr/local/bin/wp
+RUN mkdir /var/www/.wp-cli
+RUN chown www-data:www-data /var/www/.wp-cli
 
 RUN usermod -u $UID www-data
 RUN groupmod -g $GID www-data
