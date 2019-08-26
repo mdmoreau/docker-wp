@@ -58,6 +58,8 @@ define('DB_NAME', 'wordpress');
 define('DB_USER', 'username');
 define('DB_PASSWORD', 'password');
 define('DB_HOST', 'mysql');
+define('DB_CHARSET', 'utf8');
+define('DB_COLLATE', '');
 define('WP_HOME', 'http://site.localhost');
 define('WP_SITEURL', 'http://site.localhost');
 ```
