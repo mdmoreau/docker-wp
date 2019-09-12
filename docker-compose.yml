@@ -31,6 +31,8 @@ services:
 
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
+    volumes:
+      - ./docker-php.ini:/usr/local/etc/php/conf.d/php.ini
     ports:
       - "8080:80"
     environment:
