@@ -48,9 +48,33 @@ Basic Docker configuration for local WordPress development
 
 ### Tracking an entire install
 
+- This typically involves tracking an entire WordPress install in git while ignoring the configuration file
+- Things like the uploads and cache directories are normally ignored as well
+- A `wp-config.php` file can created by using the code block underneath as a template
+- Most databases can be imported without needing edits as the `WP_HOME` and `WP_SITEURL` will take precedence over the `wp_options` values
+
+```php
+<?php
+define('DB_NAME', 'wordpress');
+define('DB_USER', 'username');
+define('DB_PASSWORD', 'password');
+define('DB_HOST', 'mysql');
+define('DB_CHARSET', 'utf8');
+define('DB_COLLATE', '');
+define('WP_HOME', 'http://site.localhost');
+define('WP_SITEURL', 'http://site.localhost');
+
+$table_prefix = 'wp_';
+
+if (!defined('ABSPATH')) {
+	define('ABSPATH', dirname(__FILE__) . '/');
+}
+
+require_once(ABSPATH . 'wp-settings.php');
+```
+
 - Some services like Pantheon support a `wp-config-local.php` file for a local development configuration
-- This typically involves tracking an entire WordPress install in git while ignoring the local configuration file
-- Most databases can be imported without needing edits as the `WP_HOME` and `WP_SITEURL` values from `wp-config-local.php` will take precedence over the `wp_options` values
+- This can use a trimmed down version of the above code block, as seen below
 
 ```php
 <?php
