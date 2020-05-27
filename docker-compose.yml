@@ -34,7 +34,7 @@ services:
     volumes:
       - ./docker-php.ini:/usr/local/etc/php/conf.d/php.ini
     ports:
-      - "8080:80"
+      - "8888:80"
     environment:
       - PMA_HOST=mysql
     depends_on:

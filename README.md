@@ -41,7 +41,7 @@ Basic Docker configuration for local WordPress development
 
 ### phpMyAdmin
 
-- phpMyAdmin can be accessed at http://localhost:8080 or any other `localhost` address (e.g. http://site.localhost:8080) on port 8080 with `root:root` or `username:password`
+- phpMyAdmin can be accessed at http://localhost:8888 or any other `localhost` address (e.g. http://site.localhost:8888) on port 8888 with `root:root` or `username:password`
 - The port for this can be adjusted in `docker-compose.yml` as needed
 
 ## Example usage
