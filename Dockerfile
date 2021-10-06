@@ -1,12 +1,12 @@
-FROM php:fpm
+FROM php:7.4-fpm
 
-ARG UID=1000
-ARG GID=1000
+ARG UID=$UID
+ARG GID=$GID
 
 RUN apt update
-RUN apt install -y mariadb-client libjpeg62-turbo-dev libpng-dev
+RUN apt install -y mariadb-client libfreetype6-dev libjpeg62-turbo-dev libpng-dev
 
-RUN docker-php-ext-configure gd --with-jpeg=/usr/include/
+RUN docker-php-ext-configure gd --with-freetype --with-jpeg
 RUN docker-php-ext-install mysqli gd
 
 RUN curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
