@@ -19,6 +19,7 @@ Basic Docker configuration for local WordPress development
 
 - Start: `docker compose up -d`
 - Stop: `docker compose down`
+- See environment variables below for configuration options
 
 ## Features
 
@@ -36,13 +37,31 @@ Basic Docker configuration for local WordPress development
 
 - When running the start command, the install will be available on http://localhost by default
 - Any sort of `localhost` address will work, so it's recommended to use something like http://site.localhost to distinguish multiple installs
-- Unless you change the default ports in `docker-compose.yml`, only one instance of this setup can run at a time (data still persists after stopping)
-- It may also be necessary to stop anything else running on the host's port 80 (typically Apache) or change the default ports as mentioned above
+- Unless you change the default port via environment variables, only one instance of this setup can run at a time (data still persists after stopping)
+- It may also be necessary to stop anything else running on the host's port 80 (typically Apache) or change the default port via environment variables
 
 ### phpMyAdmin
 
 - phpMyAdmin can be accessed at http://localhost:8888 or any other `localhost` address (e.g. http://site.localhost:8888) on port 8888 with `root:root` or `username:password`
-- The port for this can be adjusted in `docker-compose.yml` as needed
+- The port for this can be adjusted as an environment variable
+
+### Environment variables
+
+- Environment variables can be added to a `.env` file in the project root to override default values as needed
+- The following snippet shows what a `.env` file would look like while using all default values
+
+```
+UID=1000
+GID=1000
+NGINX_PORT=80
+PMA_PORT=8888
+```
+
+- `UID` and `GID`: Set to your current OS user values to avoid filesystem permission issues
+	- Can be typically found by running `id` from a terminal
+- `NGINX_PORT` and `PMA_PORT`: Override the default ports for NGINX and phpMyAdmin
+	- Useful if you already have other things running on the default ports
+- Stopping Docker and running `docker-compose build` after changing these values will ensure changes take effect
 
 ## Example usage
 
