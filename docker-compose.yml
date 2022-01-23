@@ -34,7 +34,7 @@ services:
       - mysql
 
   phpmyadmin:
-    image: phpmyadmin/phpmyadmin
+    image: phpmyadmin
     volumes:
       - ./docker-php.ini:/usr/local/etc/php/conf.d/php.ini
     ports:
