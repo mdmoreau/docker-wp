@@ -25,7 +25,7 @@ Basic Docker configuration for local WordPress development
 
 ### WP-CLI
 
-- `docker-compose run php wp [command]`
+- `docker compose run php wp [command]`
 - `[command]` can be any WP-CLI command, e.g. `plugin update --all`
 
 ### Fallback asset loading
@@ -61,7 +61,7 @@ PMA_PORT=8888
 	- Can be typically found by running `id` from a terminal
 - `NGINX_PORT` and `PMA_PORT`: Override the default ports for NGINX and phpMyAdmin
 	- Useful if you already have other things running on the default ports
-- Stopping Docker and running `docker-compose build` after changing these values will ensure changes take effect
+- Stopping Docker and running `docker compose build` after changing these values will ensure changes take effect
 
 ## Example usage
 
@@ -115,8 +115,8 @@ define('WP_SITEURL', 'http://' . ($_SERVER['HTTP_HOST'] ?? 'localhost'));
 - A database can be imported after this process, though the `home` and `siteurl` values will need to be updated in the `wp_options` table to match the new `localhost` URL
 
 ```
-docker-compose run php wp core download
-docker-compose run php wp config create --dbname=wordpress --dbuser=username --dbpass=password --dbhost=mysql
-docker-compose run php wp core install --url=site.localhost --title=site.localhost --admin_user=admin --admin_password=admin --admin_email=admin@site.localhost --skip-email
-docker-compose run php wp plugin install plugin-a plugin-b plugin-c
+docker compose run php wp core download
+docker compose run php wp config create --dbname=wordpress --dbuser=username --dbpass=password --dbhost=mysql
+docker compose run php wp core install --url=site.localhost --title=site.localhost --admin_user=admin --admin_password=admin --admin_email=admin@site.localhost --skip-email
+docker compose run php wp plugin install plugin-a plugin-b plugin-c
 ```
