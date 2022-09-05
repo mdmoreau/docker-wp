@@ -9,9 +9,9 @@ Basic Docker configuration for local WordPress development
 
 ## Includes
 
-- NGINX
+- Apache
 - MariaDB
-- PHP-FPM
+- PHP
 - WP-CLI
 - phpMyAdmin
 
@@ -25,13 +25,13 @@ Basic Docker configuration for local WordPress development
 
 ### WP-CLI
 
-- `docker compose run php wp [command]`
+- `docker compose exec wp-cli wp [command]`
 - `[command]` can be any WP-CLI command, e.g. `plugin update --all`
 
 ### Fallback asset loading
 
-- The `docker-nginx.conf` file can be edited to automatically load any missing assets from another URL
-- `https://example.com/wp-content/uploads/` can be changed to your live uploads URL to avoid having to pull down assets for local development
+- The `.htaccess` file can be edited to automatically load any missing assets from another URL
+- `https://example.com` can be changed to your live URL to avoid having to pull down assets for local development
 
 ### Accessing localhost
 
@@ -53,15 +53,15 @@ Basic Docker configuration for local WordPress development
 ```
 UID=1000
 GID=1000
-NGINX_PORT=80
+WP_PORT=80
 PMA_PORT=8888
 ```
 
 - `UID` and `GID`: Set to your current OS user values to avoid filesystem permission issues
 	- Can be typically found by running `id` from a terminal
-- `NGINX_PORT` and `PMA_PORT`: Override the default ports for NGINX and phpMyAdmin
+- `WP_PORT` and `PMA_PORT`: Override the default ports for WordPress and phpMyAdmin
 	- Useful if you already have other things running on the default ports
-- Stopping Docker and running `docker compose build` after changing these values will ensure changes take effect
+- Restarting Docker Compose after changing these values will ensure changes take effect
 
 ## Example usage
 
@@ -69,54 +69,17 @@ PMA_PORT=8888
 
 - This typically involves tracking an entire WordPress install in git while ignoring the configuration file
 - Things like the uploads and cache directories are normally ignored as well
-- A `wp-config.php` file can created by using the code block underneath as a template
-- Most databases can be imported without needing edits as the `WP_HOME` and `WP_SITEURL` will take precedence over the `wp_options` values
-
-```php
-<?php
-define('DB_NAME', 'wordpress');
-define('DB_USER', 'username');
-define('DB_PASSWORD', 'password');
-define('DB_HOST', 'mysql');
-define('DB_CHARSET', 'utf8');
-define('DB_COLLATE', '');
-define('WP_HOME', 'http://' . ($_SERVER['HTTP_HOST'] ?? 'localhost'));
-define('WP_SITEURL', 'http://' . ($_SERVER['HTTP_HOST'] ?? 'localhost'));
-
-$table_prefix = 'wp_';
-
-if (!defined('ABSPATH')) {
-	define('ABSPATH', dirname(__FILE__) . '/');
-}
-
-require_once(ABSPATH . 'wp-settings.php');
-```
-
+- A `wp-config.php` file will be automatically generated if it doesn't already exist
 - Some services like Pantheon support a `wp-config-local.php` file for a local development configuration
-- This can use a trimmed down version of the above code block, as seen below
 
 ```php
 <?php
 define('DB_NAME', 'wordpress');
 define('DB_USER', 'username');
 define('DB_PASSWORD', 'password');
-define('DB_HOST', 'mysql');
+define('DB_HOST', 'database');
 define('DB_CHARSET', 'utf8');
 define('DB_COLLATE', '');
 define('WP_HOME', 'http://' . ($_SERVER['HTTP_HOST'] ?? 'localhost'));
 define('WP_SITEURL', 'http://' . ($_SERVER['HTTP_HOST'] ?? 'localhost'));
-```
-
-### Whitelisting specific files
-
-- If you only want to track specific files (e.g. your theme) in git, you can still get a development environment setup quickly with a few WP-CLI commands
-- The commands will download and install WordPress along with any plugins that are required
-- An initial admin user with credentials `admin:admin` will be created
-- A database can be imported after this process, though the `home` and `siteurl` values will need to be updated in the `wp_options` table to match the new `localhost` URL
-
-```
-docker compose run php wp core download
-docker compose run php wp config create --dbname=wordpress --dbuser=username --dbpass=password --dbhost=mysql
-docker compose run php wp core install --url=site.localhost --title=site.localhost --admin_user=admin --admin_password=admin --admin_email=admin@site.localhost --skip-email
-docker compose run php wp plugin install plugin-a plugin-b plugin-c
 ```
