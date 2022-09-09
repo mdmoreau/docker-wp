@@ -1,7 +1,7 @@
-# Put this in your .htaccess, before the WordPress rules.
-RewriteCond %{HTTP_HOST} !^example\.com$
+RewriteCond %{HTTP_HOST} localhost$
+RewriteCond %{REQUEST_URI} ^/wp-content/uploads/
 RewriteCond %{REQUEST_FILENAME} !-f
-RewriteRule ^(.*)\.(jpe?g|gif|png)$ https://example.com/$1.$2 [R=302,NC,L]
+RewriteRule (.*) https://example.com/$1 [QSA,L]
 
 php_value upload_max_filesize 1G
 php_value post_max_size 1G
