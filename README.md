@@ -20,7 +20,7 @@ Basic Docker configuration for local WordPress development
 - The optional `.env` file serves as a template using default values
 - `UID` and `GID`: Set to the current operating system user values to avoid filesystem permission issues
 - `WP_PORT` and `PMA_PORT`: Override the default ports for WordPress and phpMyAdmin
-- Assumes that the install ignores `wp-config.php` as the file will be generated when it doesn't exist
+- A compatible `wp-config.php` will be generated if one does not already exist
 - The optional `wp-config-local.php` can be used for supported installs where `wp-config.php` is tracked
 
 ## Usage
