@@ -34,8 +34,8 @@ Basic Docker configuration for local WordPress development
 
 ### WP-CLI
 
-- `docker compose exec wp-cli [command]`
-- `[command]` can be any WP-CLI command (`wp media regenerate`, `wp plugin update --all`, etc)
+- `docker compose run --rm wp-cli [command]`
+- `[command]` can be any WP-CLI command (`--info`, `media regenerate`, etc)
 
 ### phpMyAdmin
 
