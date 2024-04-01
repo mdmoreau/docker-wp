@@ -13,11 +13,6 @@ services:
       WORDPRESS_CONFIG_EXTRA: |
         define( 'WP_HOME', 'http://' . ($$_SERVER['HTTP_HOST'] ?? 'localhost') );
         define( 'WP_SITEURL', 'http://' . ($$_SERVER['HTTP_HOST'] ?? 'localhost') );
-        define( 'WP_ENVIRONMENT_TYPE', 'local' );
-        define( 'DB_CHARSET', 'utf8' );
-        define( 'DB_COLLATE', '' );
-    extra_hosts:
-      - host.docker.internal:host-gateway
     volumes:
       - .:/var/www/html
 
@@ -33,9 +28,6 @@ services:
       WORDPRESS_CONFIG_EXTRA: |
         define( 'WP_HOME', 'http://' . ($$_SERVER['HTTP_HOST'] ?? 'localhost') );
         define( 'WP_SITEURL', 'http://' . ($$_SERVER['HTTP_HOST'] ?? 'localhost') );
-        define( 'WP_ENVIRONMENT_TYPE', 'local' );
-        define( 'DB_CHARSET', 'utf8' );
-        define( 'DB_COLLATE', '' );
     volumes:
       - .:/var/www/html
 
