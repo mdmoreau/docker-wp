@@ -11,6 +11,8 @@ services:
       WORDPRESS_DB_PASSWORD: password
       WORDPRESS_DEBUG: true
       WORDPRESS_CONFIG_EXTRA: |
+        define( 'WP_ENVIRONMENT_TYPE', 'local' );
+        define( 'WP_DEVELOPMENT_MODE', 'all' );
         define( 'WP_HOME', 'http://' . ($$_SERVER['HTTP_HOST'] ?? 'localhost') );
         define( 'WP_SITEURL', 'http://' . ($$_SERVER['HTTP_HOST'] ?? 'localhost') );
     volumes:
@@ -26,6 +28,8 @@ services:
       WORDPRESS_DB_PASSWORD: password
       WORDPRESS_DEBUG: true
       WORDPRESS_CONFIG_EXTRA: |
+        define( 'WP_ENVIRONMENT_TYPE', 'local' );
+        define( 'WP_DEVELOPMENT_MODE', 'all' );
         define( 'WP_HOME', 'http://' . ($$_SERVER['HTTP_HOST'] ?? 'localhost') );
         define( 'WP_SITEURL', 'http://' . ($$_SERVER['HTTP_HOST'] ?? 'localhost') );
     volumes:
